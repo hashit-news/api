@@ -32,6 +32,8 @@ try
             : HttpLoggingFields.All;
     });
 
+    builder.Services.AddHealthChecks();
+
     builder.Services.AddCors();
 
     builder.Services.AddHttpContextAccessor();
@@ -41,6 +43,8 @@ try
     app.UseHttpLogging();
 
     app.UseCors();
+
+    app.UseHealthChecks("/health");
 
     app.Run();
 
@@ -56,3 +60,7 @@ finally
 {
     Log.CloseAndFlush();
 }
+
+// Used for integration testing.
+// https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-6.0#sut-environment
+public partial class Program { }
