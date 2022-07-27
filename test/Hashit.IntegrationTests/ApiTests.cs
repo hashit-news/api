@@ -17,4 +17,12 @@ public sealed class HealthTests
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
+
+    [Fact]
+    public async Task Response_Contains_Request_ID()
+    {
+        var response = await _client.GetAsync("/health");
+
+        response.Headers.Should().ContainKey(CustomHeaders.RequestId);
+    }
 }

@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.Domain.Tests", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.Infrastructure.Tests", "test\Hashit.Infrastructure.Tests\Hashit.Infrastructure.Tests.csproj", "{A2BD5909-0F3A-4EBC-9DAE-1421CAAF765B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.IntegrationTests", "test\Hashit.IntegrationTests\Hashit.IntegrationTests.csproj", "{193EFF1E-5E8E-4770-BCFE-1F772776E491}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,10 +76,6 @@ Global
 		{A2BD5909-0F3A-4EBC-9DAE-1421CAAF765B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2BD5909-0F3A-4EBC-9DAE-1421CAAF765B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2BD5909-0F3A-4EBC-9DAE-1421CAAF765B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{193EFF1E-5E8E-4770-BCFE-1F772776E491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{193EFF1E-5E8E-4770-BCFE-1F772776E491}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{193EFF1E-5E8E-4770-BCFE-1F772776E491}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{193EFF1E-5E8E-4770-BCFE-1F772776E491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E3EC40EF-0760-4A09-9621-5CAACF2B0CA3} = {D44797B4-09E1-4684-82D1-D54C4DCECD75}
@@ -94,6 +88,5 @@ Global
 		{97BE7D19-C572-4EC2-BEBC-8857A1F61E2C} = {32BE3E65-B5B0-45D5-9C82-117E92E66190}
 		{7BB9A9A2-3F46-4E4C-A75C-CAB36068B00A} = {32BE3E65-B5B0-45D5-9C82-117E92E66190}
 		{A2BD5909-0F3A-4EBC-9DAE-1421CAAF765B} = {32BE3E65-B5B0-45D5-9C82-117E92E66190}
-		{193EFF1E-5E8E-4770-BCFE-1F772776E491} = {32BE3E65-B5B0-45D5-9C82-117E92E66190}
 	EndGlobalSection
 EndGlobal

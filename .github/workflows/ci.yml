@@ -13,7 +13,7 @@ env:
   DOTNET_VERSION: "6.0.x"
 
 jobs:
-  test:
+  build-and-unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,10 +23,28 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Install package dependencies
-        run: dotnet restore
+        run: dotnet restore Hashit.sln
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build Hashit.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test Hashit.sln --no-restore --verbosity normal
+  integration-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Start docker
+        run: docker-compose up -d
+      - name: Install package dependencies
+        run: dotnet restore Hashit.IntegraionTests.sln
+
+      - name: Build
+        run: dotnet build Hashit.IntegraionTests.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test Hashit.IntegraionTests.sln --no-restore --verbosity normal

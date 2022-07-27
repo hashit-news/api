@@ -44,6 +44,8 @@ try
 
     app.UseCors();
 
+    app.UseMiddleware<RequestIdMiddleware>();
+
     app.UseHealthChecks("/health");
 
     app.Run();
