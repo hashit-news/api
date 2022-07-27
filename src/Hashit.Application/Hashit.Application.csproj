@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>42312</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hashit.Domain\Hashit.Domain.csproj" />
+    <ProjectReference Include="..\Hashit.Data\Hashit.Data.csproj" />
+    <ProjectReference Include="..\Hashit.Infrastructure\Hashit.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
