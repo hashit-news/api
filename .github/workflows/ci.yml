@@ -41,10 +41,10 @@ jobs:
       - name: Start docker
         run: docker-compose up -d
       - name: Install package dependencies
-        run: dotnet restore Hashit.IntegraionTests.sln
+        run: dotnet restore Hashit.IntegrationTests.sln
 
       - name: Build
-        run: dotnet build Hashit.IntegraionTests.sln --configuration Release --no-restore
+        run: dotnet build Hashit.IntegrationTests.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Hashit.IntegraionTests.sln --no-restore --verbosity normal
+        run: dotnet test Hashit.IntegrationTests.sln --no-restore --verbosity normal
