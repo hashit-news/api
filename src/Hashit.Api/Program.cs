@@ -38,6 +38,8 @@ try
 
     builder.Services.AddHttpContextAccessor();
 
+    builder.Services.AddDatabase(builder.Configuration, builder.Environment);
+
     var app = builder.Build();
 
     app.UseHttpLogging();
@@ -54,6 +56,14 @@ try
 }
 catch (Exception ex)
 {
+    // For silencing EF Core's migration termination error log which is expected.
+    // https://stackoverflow.com/a/70256808
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+
     Log.Fatal(ex, "Host terminated unexpectedly");
 
     return 1;

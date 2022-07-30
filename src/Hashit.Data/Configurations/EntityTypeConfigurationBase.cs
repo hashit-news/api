@@ -4,12 +4,8 @@ public abstract class EntityTypeConfigurationBase<T> : IEntityTypeConfiguration<
 
     public virtual void Configure(EntityTypeBuilder<T> builder)
     {
-        builder
-            .Property(e => e.CreatedAt)
-            .HasDefaultValue(SystemClock.Instance.GetCurrentInstant());
-        builder
-            .Property(e => e.UpdatedAt)
-            .HasDefaultValue(SystemClock.Instance.GetCurrentInstant());
+        builder.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+        builder.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         ConfigureEntity(builder);
     }

@@ -16,7 +16,7 @@ public class UserRole : Entity
     /// <summary>
     /// The user's role.
     /// </summary>
-    public RoleId RoleId { get; set; }
+    public RoleType RoleId { get; set; }
 
     /// <summary>
     /// The user's role.

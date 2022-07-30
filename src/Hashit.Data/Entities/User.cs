@@ -28,7 +28,7 @@ public class User : Entity
     /// </summary>
     [Required]
     [MaxLength(40)]
-    public string WallAddress { get; set; } = null!;
+    public string WalletAddress { get; set; } = null!;
 
     /// <summary>
     /// Randomly generated nonce used to sign and verify a user's wallet address.

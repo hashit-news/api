@@ -1,4 +1,4 @@
-public enum RoleId
+public enum RoleType
 {
     /// <summary>
     /// A user with this role has full access all protected resources.
@@ -20,5 +20,5 @@ public class Role : Entity
     /// The role id.
     /// </summary>
     [Key]
-    public RoleId Id { get; set; }
+    public RoleType Id { get; set; }
 }

@@ -2,9 +2,6 @@ public sealed class RoleEntityTypeConfiguration : EntityTypeConfigurationBase<Ro
 {
     public override void ConfigureEntity(EntityTypeBuilder<Role> builder)
     {
-        builder
-            .Property(x => x.Id)
-            .HasConversion(v => v.ToString(), v => (RoleId)Enum.Parse(typeof(RoleId), v))
-            .HasMaxLength(Enum.GetNames<RoleId>().Max(x => x.Length));
+        builder.HasData(Enum.GetValues<RoleType>().Select(x => new Role() { Id = x }));
     }
 }

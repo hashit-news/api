@@ -17,6 +17,7 @@ public static class ProgramHostingExtensions
                     {
                         o.UseNodaTime();
                         o.MigrationsAssembly(typeof(Entity).Assembly.GetName().Name);
+                        o.MigrationsHistoryTable("__migration_history");
                     }
                 )
                 .UseSnakeCaseNamingConvention();
