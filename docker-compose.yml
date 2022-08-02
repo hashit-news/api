@@ -13,8 +13,6 @@ services:
       retries: 10
     restart: always
     environment:
-      - POSTGRES_DB=hashit
-      - POSTGRES_USER=hashit
       - POSTGRES_PASSWORD=hashit
     logging:
       options:

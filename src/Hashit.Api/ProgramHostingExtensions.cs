@@ -8,26 +8,17 @@ public static class ProgramHostingExtensions
         IHostEnvironment environment
     )
     {
-        services.AddDbContext<HashitDbContext>(options =>
-        {
-            options
-                .UseNpgsql(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    o =>
-                    {
-                        o.UseNodaTime();
-                        o.MigrationsAssembly(typeof(Entity).Assembly.GetName().Name);
-                        o.MigrationsHistoryTable("__migration_history");
-                    }
-                )
-                .UseSnakeCaseNamingConvention();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var enableSensitiveDataLogging = !environment.IsProduction();
+        var enableDetailedErrors = !environment.IsProduction();
 
-            if (!environment.IsProduction())
-            {
-                options.EnableSensitiveDataLogging();
-                options.EnableDetailedErrors();
-            }
-        });
+        services.AddDbContext<HashitDbContext>(
+            HashitDbContext.ConfigureDefaultOptions(
+                connectionString,
+                enableSensitiveDataLogging,
+                enableDetailedErrors
+            )
+        );
 
         return services;
     }
