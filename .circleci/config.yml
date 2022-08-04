@@ -57,9 +57,10 @@ jobs:
               -timeout 1m
 
       - run:
+          working_directory: ~/test-integration
           name: Run integration tests
           command: |
-            dotnet test test-integration/Hashit.Integration.sln -c release
+            dotnet test Hashit.Integration.sln -c release
 
 workflows:
   ci:
