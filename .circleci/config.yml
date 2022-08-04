@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@2.1.2
+  jq: circleci/jq@2.2.0
 
 jobs:
   format:
@@ -34,6 +35,7 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:latest
     steps:
       - checkout
+      - jq/install
       - docker/install-docker-tools
 
       - setup_remote_docker:
