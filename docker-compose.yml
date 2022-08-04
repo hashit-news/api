@@ -8,9 +8,9 @@ services:
       - "5432:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "hashit", "-U", "hashit"]
-      timeout: 45s
+      timeout: 5s
       interval: 10s
-      retries: 10
+      retries: 5
     restart: always
     environment:
       - POSTGRES_PASSWORD=hashit
