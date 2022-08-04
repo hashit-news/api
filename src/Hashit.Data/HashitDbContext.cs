@@ -43,7 +43,7 @@ public class HashitDbContext : DbContext
                     o =>
                     {
                         o.UseNodaTime();
-                        o.MigrationsAssembly(typeof(Entity).Assembly.GetName().Name);
+                        o.MigrationsAssembly(typeof(HashitDbContext).Assembly.GetName().Name);
                         o.MigrationsHistoryTable("__migration_history");
                     }
                 )
