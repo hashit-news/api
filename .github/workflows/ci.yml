@@ -40,7 +40,7 @@ jobs:
         run: dotnet build Hashit.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Hashit.sln --no-restore --verbosity normal
+        run: dotnet test --no-restore --configuration Release --verbosity normal
   integration-test:
     runs-on: ubuntu-latest
     name: Run integration tests
@@ -53,10 +53,10 @@ jobs:
       - name: Start docker
         run: docker-compose up -d
       - name: Install package dependencies
-        run: dotnet restore Hashit.IntegrationTests.sln
+        run: dotnet restore test-integration/Hashit.IntegrationTests.sln
 
       - name: Build
-        run: dotnet build Hashit.IntegrationTests.sln --configuration Release --no-restore
+        run: dotnet build test-integration/Hashit.IntegrationTests.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Hashit.IntegrationTests.sln --no-restore --verbosity normal
+        run: dotnet test test-integration/Hashit.IntegrationTests.sln --no-restore --configuration Release --verbosity normal
