@@ -28,7 +28,6 @@ jobs:
 
   integration-test:
     docker:
-      - image: cimg/base:current
       - image: mcr.microsoft.com/dotnet/sdk:latest
     steps:
       - checkout
