@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@2.1.2
+
 jobs:
   format:
     docker:
@@ -28,10 +31,11 @@ jobs:
 
   integration-test:
     docker:
-      - image: cimg/base:current
       - image: mcr.microsoft.com/dotnet/sdk:latest
     steps:
       - checkout
+      - docker/install-docker-tools
+
       - setup_remote_docker:
           docker_layer_caching: true
 
