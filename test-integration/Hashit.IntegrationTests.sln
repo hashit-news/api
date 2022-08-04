@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.Api", "src\Hashit.Api\Hashit.Api.csproj", "{83B6A6A4-CB26-409D-B81C-05E6F9B64332}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.Api", "..\src\Hashit.Api\Hashit.Api.csproj", "{83B6A6A4-CB26-409D-B81C-05E6F9B64332}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.IntegrationTests", "test-integration\Hashit.IntegrationTests\Hashit.IntegrationTests.csproj", "{AF68295A-B851-4766-840F-E6DC507CBCB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashit.IntegrationTests", "Hashit.IntegrationTests\Hashit.IntegrationTests.csproj", "{AF68295A-B851-4766-840F-E6DC507CBCB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
