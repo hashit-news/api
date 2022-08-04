@@ -57,10 +57,9 @@ jobs:
               -timeout 1m
 
       - run:
-          working_directory: ~/test-integration
           name: Run integration tests
           command: |
-            dotnet test -c release
+            dotnet test ./test-integration -c release
 
 workflows:
   ci:
