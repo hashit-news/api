@@ -36,25 +36,15 @@ jobs:
           docker_layer_caching: true
 
       - run:
-          name: Install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.3.0
-
-      - run:
           name: Build images of services declared in docker-compose.yml
           command: docker-compose build
-
-      - run:
-          name: Start services declared in docker-compose.yml
-          command: docker-compose up -d
 
       - run:
           name: Start docker-compose and verify service(s)
           command: |
             # Setting the Docker Compose project name to "hashit-backend"
             # the names of our services' containers would be prefixed with "hashit-backend".
-            docker-compose --project hashit-backend up -d
+            docker-compose -p hashit-backend up -d
 
             # Check of postgresql is ready
             docker container run --network container:hashit-backend_postgres_1 \
