@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using Serilog.Events;
+using System.Reflection;
 
 Log.Logger = new LoggerConfiguration().MinimumLevel
     .Debug()
@@ -38,6 +39,23 @@ try
 
     builder.Services.AddHttpContextAccessor();
 
+    builder.Services.AddDatabase(builder.Configuration, builder.Environment);
+
+    builder.Services.AddRouting(options =>
+    {
+        options.LowercaseUrls = true;
+    });
+
+    builder.Services.AddControllers();
+
+    builder.Services.AddEndpointsApiExplorer();
+
+    builder.Services.AddSwaggerGen(options =>
+    {
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    });
+
     var app = builder.Build();
 
     app.UseHttpLogging();
@@ -46,7 +64,23 @@ try
 
     app.UseMiddleware<RequestIdMiddleware>();
 
-    app.UseHealthChecks("/health");
+    app.UseHealthChecks(Routes.HealthChecks);
+
+    if (!builder.Environment.IsProduction())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint(Routes.SwaggerDocument, "Hashit API");
+        });
+    }
+
+    app.UseRouting();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
 
     app.Run();
 
@@ -54,6 +88,14 @@ try
 }
 catch (Exception ex)
 {
+    // For silencing EF Core's migration termination error log which is expected.
+    // https://stackoverflow.com/a/70256808
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+
     Log.Fatal(ex, "Host terminated unexpectedly");
 
     return 1;
