@@ -1,3 +1,6 @@
+/// <summary>
+/// Role types.
+/// </summary>
 public enum RoleType
 {
     /// <summary>
@@ -9,16 +12,4 @@ public enum RoleType
     /// A user with this role has acess to their own protected resources.
     /// </summary>
     User,
-}
-
-/// <summary>
-/// A role in the system that protecteds access to resources.
-/// </summary>
-public class Role : Entity
-{
-    /// <summary>
-    /// The role id.
-    /// </summary>
-    [Key]
-    public RoleType Id { get; set; }
 }

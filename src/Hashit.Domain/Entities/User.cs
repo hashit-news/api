@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 /// <summary>
 /// A user of the application.
 /// </summary>
@@ -21,6 +24,9 @@ public class User : Entity
     [MaxLength(255)]
     public string? Email { get; set; }
 
+    /// <summary>
+    /// Whether the email address has been verified.
+    /// </summary>
     public bool EmailVerified { get; set; }
 
     /// <summary>
@@ -51,4 +57,6 @@ public class User : Entity
     /// Time until the user can attempt login again after being locked for too many failed attempts.
     /// </summary>
     public Instant? LockoutExpiryAt { get; set; }
+
+    public override object[] Key => new object[] { Id };
 }

@@ -22,4 +22,6 @@ public class UserRole : Entity
     /// The user's role.
     /// </summary>
     public Role Role { get; set; } = null!;
+
+    public override object[] Key => new object[] { UserId, RoleId };
 }
