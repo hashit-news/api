@@ -13,8 +13,20 @@ env:
   DOTNET_VERSION: "6.0.x"
 
 jobs:
+  check_formatting:
+    runs-on: ubuntu-latest
+    name: Check formatting
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Restore dotnet tools
+      - run: dotnet tool restore
+
+      - name: Check formatting
+      - run: dotnet csharpier --check
   build-and-unit-test:
     runs-on: ubuntu-latest
+    name: Build and run unit tests
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET 6
@@ -32,6 +44,7 @@ jobs:
         run: dotnet test Hashit.sln --no-restore --verbosity normal
   integration-test:
     runs-on: ubuntu-latest
+    name: Run integration tests
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET 6
