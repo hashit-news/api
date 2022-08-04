@@ -60,7 +60,7 @@ jobs:
           working_directory: ~/test-integration
           name: Run integration tests
           command: |
-            dotnet test Hashit.Integration.sln -c release
+            dotnet test -c release
 
 workflows:
   ci:
