@@ -33,6 +33,8 @@ jobs:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:latest
       - image: postgres:14.2-alpine
+        environment:
+          POSTGRES_PASSWORD: hashit
     steps:
       - checkout
       - docker/install-dockerize
