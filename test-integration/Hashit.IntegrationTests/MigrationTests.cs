@@ -8,7 +8,7 @@ public sealed class MigrationTests
         // arrange
         var dbName = $"hashit-test-{Guid.NewGuid()}";
         var connectionString =
-            $"Host=localhost;Username=postgres;Password=hashit;Database={dbName}";
+            $"Server=localhost;Username=postgres;Password=hashit;Database={dbName}";
         var options = HashitDbContext.GetDefaultOptions(connectionString, true, true);
         var db = new HashitDbContext(options);
 
@@ -18,7 +18,6 @@ public sealed class MigrationTests
         var appliedMigrations = await db.Database.GetAppliedMigrationsAsync();
 
         // assert
-        // created.Should().BeTrue();
         pendingMigrations.Should().NotBeEmpty();
         appliedMigrations.Should().NotBeEmpty();
         pendingMigrations.Should().BeEquivalentTo(appliedMigrations);
