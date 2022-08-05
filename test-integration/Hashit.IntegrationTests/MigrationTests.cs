@@ -8,7 +8,7 @@ public sealed class MigrationTests
         // arrange
         var dbName = $"hashit-test-{Guid.NewGuid()}";
         var connectionString =
-            $"Server=localhost;Username=postgres;Password=hashit;Database={dbName}";
+            $"Server=127.0.0.1;Username=postgres;Password=hashit;Database={dbName}";
         var options = HashitDbContext.GetDefaultOptions(connectionString, true, true);
         var db = new HashitDbContext(options);
 
