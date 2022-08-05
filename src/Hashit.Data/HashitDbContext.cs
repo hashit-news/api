@@ -45,6 +45,7 @@ public class HashitDbContext : DbContext
                         o.UseNodaTime();
                         o.MigrationsAssembly(typeof(HashitDbContext).Assembly.GetName().Name);
                         o.MigrationsHistoryTable("__migration_history");
+                        o.EnableRetryOnFailure(10);
                     }
                 )
                 .UseSnakeCaseNamingConvention();
