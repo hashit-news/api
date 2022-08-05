@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@2.1.2
+
 jobs:
   format:
     docker:
@@ -30,21 +33,13 @@ jobs:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:latest
       - image: postgres:14.2-alpine
-        environment:
-          POSTGRES_PASSWORD: hashit
     steps:
       - checkout
+      - docker/install-dockerize
 
       - run:
-          name: Waiting for Postgres to be ready
-          command: |
-            for i in `seq 1 30`;
-            do
-              nc -z localhost 5432 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for Postgress && exit 1
+          name: Wait for postgres to be ready
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: Run integration tests
