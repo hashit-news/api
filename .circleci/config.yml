@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Start docker-compose and verify service(s)
           command: |
-            docker-compose up -d
+            docker-compose up
 
             docker container run --network container:postgres \
               docker.io/jwilder/dockerize \
