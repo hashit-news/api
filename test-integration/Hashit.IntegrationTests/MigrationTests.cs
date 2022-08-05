@@ -18,7 +18,6 @@ public sealed class MigrationTests
         var appliedMigrations = await db.Database.GetAppliedMigrationsAsync();
 
         // assert
-        // created.Should().BeTrue();
         pendingMigrations.Should().NotBeEmpty();
         appliedMigrations.Should().NotBeEmpty();
         pendingMigrations.Should().BeEquivalentTo(appliedMigrations);
