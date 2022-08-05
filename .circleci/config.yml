@@ -56,6 +56,8 @@ jobs:
               -wait-retry-interval 2s \
               -timeout 1m
 
+            dotnet test ./test-integration -c release
+
       - run:
           name: Run integration tests
           command: |
