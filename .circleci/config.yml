@@ -38,9 +38,6 @@ jobs:
       - jq/install
       - docker/install-docker-tools
 
-      - setup_remote_docker:
-          docker_layer_caching: true
-
       - run:
           name: Build images of services declared in docker-compose.yml
           command: docker-compose build
