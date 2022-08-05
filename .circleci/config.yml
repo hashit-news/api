@@ -1,9 +1,5 @@
 version: 2.1
 
-orbs:
-  docker: circleci/docker@2.1.2
-  jq: circleci/jq@2.2.0
-
 jobs:
   format:
     docker:
@@ -33,25 +29,22 @@ jobs:
   integration-test:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:latest
+      - image: postgres:14.2-alpine
+        environment:
+          POSTGRES_PASSWORD: hashit
     steps:
       - checkout
-      - jq/install
-      - docker/install-docker-tools
 
       - run:
-          name: Build images of services declared in docker-compose.yml
-          command: docker-compose build
-
-      - run:
-          name: Start docker-compose and verify service(s)
+          name: Waiting for Postgres to be ready
           command: |
-            docker-compose up
-
-            docker container run --network container:postgres \
-              docker.io/jwilder/dockerize \
-              -wait tcp://localhost:5432 \
-              -wait-retry-interval 2s \
-              -timeout 1m
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgress && exit 1
 
       - run:
           name: Run integration tests
