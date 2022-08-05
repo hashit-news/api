@@ -4,17 +4,12 @@
 public abstract class Entity
 {
     /// <summary>
-    /// They primary key identifying the entity.
-    /// </summary>
-    public abstract object[] Key { get; }
-
-    /// <summary>
     /// Time the entity was created.
     /// </summary>
-    public Instant CreatedAt { get; set; }
+    public Instant CreatedAt { get; protected set; }
 
     /// <summary>
     /// Time the entity was last updated.
     /// </summary>
-    public Instant UpdatedAt { get; set; }
+    public Instant UpdatedAt { get; protected set; }
 }
