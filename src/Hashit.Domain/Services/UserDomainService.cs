@@ -3,17 +3,24 @@ public class UserDomainService : IUserDomainService
 {
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
+    private readonly IKeyGenerator _keyGenerator;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UserDomainService"/> class.
     /// </summary>
     /// <param name="userRepository"></param>
     /// <param name="roleRepository"></param>
+    /// <param name="keyGenerator"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public UserDomainService(IUserRepository userRepository, IRoleRepository roleRepository)
+    public UserDomainService(
+        IUserRepository userRepository,
+        IRoleRepository roleRepository,
+        IKeyGenerator keyGenerator
+    )
     {
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         _roleRepository = roleRepository ?? throw new ArgumentNullException(nameof(roleRepository));
+        _keyGenerator = keyGenerator ?? throw new ArgumentNullException(nameof(keyGenerator));
     }
 
     /// <inheritdoc />
@@ -34,7 +41,7 @@ public class UserDomainService : IUserDomainService
             {
                 WalletAddress = walletAddress,
                 Username = walletAddress,
-                WalletSigningNonce = "blah",
+                WalletSigningNonce = _keyGenerator.Generate256BitKey(),
             };
 
             user.AddRole(defaultRole);
