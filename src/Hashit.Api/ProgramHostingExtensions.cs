@@ -28,7 +28,7 @@ public static class ProgramHostingExtensions
         services.Scan(
             scan =>
                 scan.FromAssemblyOf<Entity>()
-                    .AddClasses(classes => classes.AssignableTo(typeof(IUserDomainService)))
+                    .AddClasses(classes => classes.AssignableTo(typeof(IDomainService)))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
         );
@@ -52,6 +52,7 @@ public static class ProgramHostingExtensions
     public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
     {
         services.AddSingleton<IKeyGenerator, KeyGenerator>();
+        services.AddSingleton<IWeb3ValidationService, Web3ValidationService>();
 
         return services;
     }

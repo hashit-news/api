@@ -12,6 +12,6 @@ public class UserRepository : Repository<User>, IUserRepository
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        return Db.Users.AnyAsync(u => u.WalletAddress == walletAddress, cancellationToken);
     }
 }

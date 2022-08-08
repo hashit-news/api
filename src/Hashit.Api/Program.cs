@@ -58,6 +58,7 @@ try
 
     builder.Services.AddInfrastructureLayer();
     builder.Services.AddDomainLayer();
+    builder.Services.AddDataLayer();
 
     var app = builder.Build();
 

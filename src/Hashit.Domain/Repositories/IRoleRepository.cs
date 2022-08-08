@@ -9,5 +9,5 @@ public interface IRoleRepository : IRepository<Role>
     /// <param name="id">Role id</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Role if found, othwerwise null.</returns>
-    Task<Role> FindByIdAsync(RoleType id, CancellationToken cancellationToken = default);
+    ValueTask<Role?> FindByIdAsync(RoleType id, CancellationToken cancellationToken = default);
 }

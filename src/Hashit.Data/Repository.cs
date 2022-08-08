@@ -16,6 +16,8 @@ public class Repository<T> : IRepository<T> where T : Entity
     /// <inheritdoc/>
     public IUnitOfWork UnitOfWork => _db;
 
+    protected HashitDbContext Db => _db;
+
     /// <inheritdoc/>
     public async Task Insert(T entity, CancellationToken cancellationToken = default)
     {

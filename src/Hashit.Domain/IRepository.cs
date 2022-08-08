@@ -1,14 +1,20 @@
 /// <summary>
 /// A repository.
 /// </summary>
-/// <typeparam name="T">The type of entity in the repository.</typeparam>
-public interface IRepository<T> where T : Entity
+public interface IRepository
 {
     /// <summary>
     /// The unit of work for this repository.
     /// </summary>
     IUnitOfWork UnitOfWork { get; }
+};
 
+/// <summary>
+/// A repository.
+/// </summary>
+/// <typeparam name="T">The type of entity in the repository.</typeparam>
+public interface IRepository<T> : IRepository where T : Entity
+{
     /// <summary>
     /// Inserts an entity into the repository.
     /// </summary>
