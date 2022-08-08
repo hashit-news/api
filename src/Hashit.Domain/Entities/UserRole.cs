@@ -6,22 +6,20 @@ public class UserRole : Entity
     /// <summary>
     /// Id of the user.
     /// </summary>
-    public int UserId { get; set; }
+    public int UserId { get; protected internal set; }
 
     /// <summary>
     /// User.
     /// </summary>
-    public User User { get; set; } = null!;
+    public User User { get; protected internal set; } = null!;
 
     /// <summary>
     /// The user's role.
     /// </summary>
-    public RoleType RoleId { get; set; }
+    public RoleType RoleId { get; protected internal set; }
 
     /// <summary>
     /// The user's role.
     /// </summary>
-    public Role Role { get; set; } = null!;
-
-    public override object[] Key => new object[] { UserId, RoleId };
+    public Role Role { get; protected internal set; } = null!;
 }

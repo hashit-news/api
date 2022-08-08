@@ -22,4 +22,38 @@ public static class ProgramHostingExtensions
 
         return services;
     }
+
+    public static IServiceCollection AddDomainLayer(this IServiceCollection services)
+    {
+        services.Scan(
+            scan =>
+                scan.FromAssemblyOf<Entity>()
+                    .AddClasses(classes => classes.AssignableTo(typeof(IDomainService)))
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+        );
+
+        return services;
+    }
+
+    public static IServiceCollection AddDataLayer(this IServiceCollection services)
+    {
+        services.Scan(
+            scan =>
+                scan.FromAssemblyOf<HashitDbContext>()
+                    .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+        );
+
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
+    {
+        services.AddSingleton<IKeyGenerator, KeyGenerator>();
+        services.AddSingleton<IWeb3ValidationService, Web3ValidationService>();
+
+        return services;
+    }
 }

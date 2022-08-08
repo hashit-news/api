@@ -56,6 +56,10 @@ try
         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
     });
 
+    builder.Services.AddInfrastructureLayer();
+    builder.Services.AddDomainLayer();
+    builder.Services.AddDataLayer();
+
     var app = builder.Build();
 
     app.UseHttpLogging();

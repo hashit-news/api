@@ -1,6 +1,6 @@
 using Npgsql;
 
-public class HashitDbContext : DbContext
+public class HashitDbContext : DbContext, IUnitOfWork
 {
     public HashitDbContext(DbContextOptions<HashitDbContext> options) : base(options) { }
 
@@ -68,10 +68,16 @@ public class HashitDbContext : DbContext
             switch (entry.State)
             {
                 case EntityState.Added:
-                    entry.Entity.CreatedAt = SystemClock.Instance.GetCurrentInstant();
+                    entry.Entity
+                        .GetType()
+                        .GetProperty("CreatedAt")
+                        ?.SetValue(entry.Entity, SystemClock.Instance.GetCurrentInstant());
                     break;
                 case EntityState.Modified:
-                    entry.Entity.UpdatedAt = SystemClock.Instance.GetCurrentInstant();
+                    entry.Entity
+                        .GetType()
+                        .GetProperty("UpdatedAt")
+                        ?.SetValue(entry.Entity, SystemClock.Instance.GetCurrentInstant());
                     break;
             }
         }
@@ -91,5 +97,10 @@ public class HashitDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(EntityTypeConfigurationBase<>).Assembly
         );
+    }
+
+    public async Task CommitAsync(CancellationToken cancellationToken = default)
+    {
+        await this.SaveChangesAsync(cancellationToken);
     }
 }

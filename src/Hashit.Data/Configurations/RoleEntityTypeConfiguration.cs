@@ -2,6 +2,6 @@ public sealed class RoleEntityTypeConfiguration : EntityTypeConfigurationBase<Ro
 {
     public override void ConfigureEntity(EntityTypeBuilder<Role> builder)
     {
-        builder.HasData(Enum.GetValues<RoleType>().Select(x => new Role() { Id = x }));
+        builder.HasData(Enum.GetValues<RoleType>().Select(x => new Role(x)));
     }
 }
